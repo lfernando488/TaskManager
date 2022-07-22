@@ -3,6 +3,7 @@ package com.taskmanager.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -17,6 +18,12 @@ public class Pessoa {
     @Column(length = 50)
     private String nome;
 
-    //private Departamento departamento;
-    //private Tarefa[] tarefas;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departamento_id")
+    private Departamento departamento;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="pessoa_id")
+    private List<Tarefa> tarefas;
+
 }

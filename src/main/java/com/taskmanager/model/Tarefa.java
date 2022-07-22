@@ -25,7 +25,7 @@ public class Tarefa {
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "departamento_id")
     private Departamento departamento;
 
