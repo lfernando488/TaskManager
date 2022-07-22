@@ -1,5 +1,6 @@
 package com.taskmanager.model;
 
+import com.taskmanager.DTO.PessoaDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,5 +26,13 @@ public class Pessoa {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="pessoa_id")
     private List<Tarefa> tarefas;
+
+    public PessoaDTO modetlToDTO(){
+        return new PessoaDTO(this.id, this.nome, this.departamento, this.tarefas);
+    }
+
+    public Pessoa(String nome){
+        this.nome = nome;
+    }
 
 }
