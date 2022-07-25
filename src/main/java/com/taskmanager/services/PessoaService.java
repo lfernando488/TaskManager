@@ -16,27 +16,35 @@ public class PessoaService {
 
     //- Adicionar um pessoa (post/pessoas)
     public void adicionarPessoa(Pessoa pessoa){
-        Pessoa result = pessoaRepository.save(pessoa);
+        try{ pessoaRepository.save(pessoa);}
+        catch (Exception e){e.printStackTrace();}
     }
 
-    //- Alterar um pessoa (put/pessoas/{id})
     public Pessoa alterarPessoa(Pessoa pessoa, Long id){
+        //Validar
+        Optional<Pessoa> p = pessoaRepository.findById(id);
+        if(p.isPresent()){
+            pessoa.setId(id);
+            return pessoaRepository.save(pessoa);
+        }
+        //Tratar melhor
         return null;
     }
 
-    public void adicionarDepartamento(Pessoa novaPessoa) {
-        pessoaRepository.save(novaPessoa);
+    public void adicionarDepartamento(Pessoa pessoaDepto) {
+        pessoaRepository.save(pessoaDepto);
     }
 
     public List<Pessoa> listarPessoas() {
         return pessoaRepository.findAll();
     }
 
-    public Pessoa alterarPessoa(Pessoa pessoa){
-        return pessoaRepository.save(pessoa);
+    public Optional<Pessoa> buscarPessoas(Long id) {
+        return pessoaRepository.findById(id);
     }
 
     public void excluirPessoa(Long id){
         pessoaRepository.deleteById(id);
     }
+
 }

@@ -18,11 +18,12 @@ public class PessoaDTO {
 
     private List<Tarefa> tarefas;
 
-    public Pessoa DTOtoModel(){
-        return new Pessoa(this.nome);
+    public Pessoa novaPessoa(){
+        return new Pessoa(null, this.nome, this.departamento, null);
     }
 
-    public PessoaDTO modelToDTO(){
-        return null;
+    public Pessoa alterarPessoa(){
+        return new Pessoa(this.nome, this.departamento);
     }
+
 }
